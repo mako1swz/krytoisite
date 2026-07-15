@@ -2,222 +2,127 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>КРУТОЙ САЙТ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet candy site</title>
     <style>
         :root {
-            --bg-dark: #03030a;
-            --neon-pink: #ff00a8;
-            --neon-cyan: #00f3ff;
-            --neon-purple: #b300ff;
-            --text: #e0e0e0;
-            --hud-line: rgba(0, 243, 255, 0.15);
+            --cs-bg: #1b1b1b;
+            --cs-panel: #2a2a2a;
+            --cs-accent: #ff4d4d; /* красный как в HUD */
+            --cs-text: #e0e0e0;
+            --cs-border: #444;
+            --font-ui: 'Courier New', Courier, monospace;
         }
 
         body {
+            background-color: var(--cs-bg);
+            color: var(--cs-text);
+            font-family: var(--font-ui);
             margin: 0;
-            padding: 0;
-            background-color: var(--bg-dark);
-            background-image:
-                linear-gradient(var(--hud-line) 1px, transparent 1px),
-                linear-gradient(90deg, var(--hud-line) 1px, transparent 1px);
-            background-size: 60px 60px;
-            color: var(--text);
-            font-family: 'Share Tech Mono', monospace;
-            text-align: center;
-            overflow-x: hidden;
-            position: relative;
+            padding: 10px;
         }
 
-        /* Фоновые цифровые линии */
-        .grid-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none;
-            z-index: 1;
-            background-image:
-                radial-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-                radial-gradient(rgba(255, 0, 168, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
+        /* Панель-рамка как HUD панель */
+        .hud-panel {
+            background: var(--cs-panel);
+            border: 1px solid var(--cs-border);
             padding: 20px;
-            position: relative;
-            z-index: 2;
+            box-shadow: 0 0 10px rgba(0,0,0,0.8);
+            max-width: 800px;
+            margin: 20px auto;
         }
 
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.8rem;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            color: white;
-            margin-bottom: 12px;
-            position: relative;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Глитч-эффект для заголовка */
-        h1::before, h1::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-dark);
-            clip: rect(20px, 9999px, 50px, 0);
-        }
-
-        h1::before {
-            left: 5px;
-            color: var(--neon-pink);
-            text-shadow: -5px 0 var(--neon-pink);
-            animation: glitch-anim-1 3s infinite linear alternate-reverse;
-        }
-
-        h1::after {
-            left: -5px;
-            color: var(--neon-cyan);
-            text-shadow: -5px 0 var(--neon-cyan);
-            animation: glitch-anim-2 4s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim-1 {
-            0% { clip: rect(15px, 9999px, 45px, 0); }
-            20% { clip: rect(60px, 9999px, 90px, 0); }
-            40% { clip: rect(30px, 9999px, 60px, 0); }
-            60% { clip: rect(80px, 9999px, 110px, 0); }
-            80% { clip: rect(10px, 9999px, 35px, 0); }
-            100% { clip: rect(50px, 9999px, 80px, 0); }
-        }
-
-        @keyframes glitch-anim-2 {
-            0% { clip: rect(40px, 9999px, 70px, 0); }
-            20% { clip: rect(90px, 9999px, 120px, 0); }
-            40% { clip: rect(55px, 9999px, 85px, 0); }
-            60% { clip: rect(110px, 9999px, 140px, 0); }
-            80% { clip: rect(35px, 9999px, 65px, 0); }
-            100% { clip: rect(75px, 9999px, 105px, 0); }
-        }
-
-        p {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            color: #aaa;
-            margin-bottom: 20px;
-        }
-
-        b {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 12px rgba(0, 243, 255, 0.6);
-        }
-
-        h3 {
-            color: var(--neon-pink);
-            border-bottom: 2px dashed var(--neon-cyan);
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-top: 40px;
-            font-family: 'Orbitron', sans-serif;
+        h1, h3 {
             text-transform: uppercase;
             letter-spacing: 2px;
+            color: #fff;
+            border-bottom: 2px solid var(--cs-accent);
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        p, li {
+            line-height: 1.5;
         }
 
         a {
-            color: var(--neon-cyan);
+            color: var(--cs-accent);
             text-decoration: none;
-            border: 1px solid var(--neon-cyan);
-            padding: 8px 16px;
-            transition: all 0.3s ease;
             font-weight: bold;
-            display: inline-block;
-            box-shadow: 0 0 8px rgba(0, 243, 255, 0.4);
+            text-shadow: 1px 1px 2px black;
         }
 
         a:hover {
-            background: var(--neon-cyan);
-            color: black;
-            box-shadow: 0 0 20px var(--neon-cyan);
-            transform: scale(1.05);
+            color: #ff8a8a;
+            text-decoration: underline;
         }
 
-        .tg-badge {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 6px 12px;
-            background: rgba(255, 0, 168, 0.2);
-            border: 1px solid rgba(255, 0, 168, 0.5);
-            color: var(--neon-pink);
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(255, 0, 168, 0.3);
-            font-weight: bold;
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin: 8px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        /* «Прицел» как маркер списка */
+        li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            color: var(--cs-accent);
+            font-size: 14px;
+            line-height: 20px;
         }
 
         img {
             max-width: 100%;
-            border-radius: 8px;
+            border: 2px solid #333;
+            filter: contrast(1.1) brightness(0.95);
+            margin-top: 15px;
+            display: block;
+        }
+
+        nav {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed #444;
+        }
+
+        .signature {
             margin-top: 30px;
-            filter: contrast(125%) brightness(110%);
-            box-shadow: 0 0 25px rgba(255, 0, 168, 0.25);
-            border: 1px solid var(--hud-line);
-        }
-
-        /* HUD-углы как в интерфейсе игры */
-        .hud-corner {
-            position: fixed;
-            width: 70px;
-            height: 70px;
-            border: 2px solid var(--neon-cyan);
-            pointer-events: none;
-            z-index: 1;
-        }
-        .top-left { top: 15px; left: 15px; border-right: none; border-bottom: none; }
-        .top-right { top: 15px; right: 15px; border-left: none; border-bottom: none; }
-        .bottom-left { bottom: 15px; left: 15px; border-top: none; border-right: none; }
-        .bottom-right { bottom: 15px; right: 15px; border-top: none; border-left: none; }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2.8rem; letter-spacing: 4px; }
-            .hud-corner { display: none; }
+            font-size: 0.9em;
+            color: #888;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <!-- Фоновая сетка -->
-    <div class="grid-overlay"></div>
+    <div class="hud-panel">
+        <h1>Sweet candy site</h1>
+        <p><b>Test site</b></p>
+        <h3>by sweet candy</h3>
 
-    <!-- HUD-рамки по углам -->
-    <div class="hud-corner top-left"></div>
-    <div class="hud-corner top-right"></div>
-    <div class="hud-corner bottom-left"></div>
-    <div class="hud-corner bottom-right"></div>
+        <ul>
+            <li><a href="https://forum.sibgamer.com/">Форум SIBGamer</a></li>
+            <li><a href="https://mako1swz.github.io/">Мой кликер</a></li>
+        </ul>
 
-    <div class="container">
-        <h1 data-text="КРУТОЙ САЙТ">КРУТОЙ САЙТ</h1>
+        <p>Мой telegram @M1k0Ni</p>
+        <p>Крутой музика: <a href="https://music.yandex.ru/artist/6767066">music.yandex.ru</a></p>
 
-        <p>
-            Чтобы сделать крутой сайт, надо быть крутым.
-        </p>
+        <img src="https://img.magnific.com/premium-photo/brown-cat-with-white-mark-wear-metalic-style-glasses-party-concept-fancy-dress-up-funny-cool-mood_25573-203.jpg?semt=ais_hybrid&w=740" alt="cat">
 
-        <h3>Как понять, что ты крутой</h3>
+        <nav>
+            <!-- сюда можно добавить ссылки меню -->
+        </nav>
 
-        <p>
-            Крутой чел всегда знает, что ОН — <br>
-            <b>КРУТОЙ</b> by mako
-        </p>
-
-        <p class="tg-badge">
-            TG крутого чела @M1k0Ni
-        </p>
-
-        <p>
-            Крутой чел всегда слушает крутую музыку: 
-            <a href="https://music.yandex.ru/artist/6767066" target="_blank">music.yandex.ru</a>
-        </p>
-
-        <img src="https://img.magnific.com/premium-photo/brown-cat-with-white-mark-wear-metalic-style-glasses-party-concept-fancy-dress-up-funny-cool-mood_25573-203.jpg?semt=ais_hybrid&w=740" alt="Кибер-кот">
+        <div class="signature">
+            CS:S style edition • v1.0
+        </div>
     </div>
 </body>
 </html>
